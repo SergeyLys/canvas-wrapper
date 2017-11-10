@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Webpack ES6 boilerplate
 
 [![tests][tests]][tests-url]
@@ -56,3 +57,7 @@ _webpack-es6-boilerplate_ is available under MIT.
 
 [cover]: https://codecov.io/gh/jluccisano/webpack-es6-boilerplate/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/jluccisano/webpack-es6-boilerplate
+=======
+# canvas-wrapper
+Custom canvas elements and keyboard events
+>>>>>>> 21e42fa3d2894f9534a649289fbd59ad01f1307b
