@@ -8,11 +8,13 @@ export default class App {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const ctx = canvas.getContext('2d');
-        const eng = new Engine();
+        const engine = new Engine({
+            gravity: 0.1
+        });
 
         const arc = new AppCircle(ctx, {
             x: 'center',
-            y: 'bottom',
+            y: 'center',
             radius: 10,
             typeStyle: 'fill',
             fillColor: 'rgba(255,0,0,1)'
@@ -56,8 +58,8 @@ export default class App {
             platform.moveTo(coordX, coordY);
         });
 
-        eng.render(function () {
-            
+        engine.render(function () {
+
             rec1.listenKey('ArrowLeft a', function () {
                 this.move(1,'left');
                 rec2.move(1.5,'left');
@@ -97,8 +99,8 @@ export default class App {
 
                 loop();
 
-                       // arc.infiniteYMoving(5);
-                       // arc.infiniteXMoving(5);
+                       arc.infiniteYMoving(5);
+                       arc.infiniteXMoving(5);
 
             });
         }

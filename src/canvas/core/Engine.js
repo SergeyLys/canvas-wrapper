@@ -1,6 +1,6 @@
 class Engine {
-    constructor(ctx, props) {
-        // this.gravity = props.gravity || null;
+    constructor(props) {
+        this.gravity = props.gravity || null;
 
     }
 
@@ -9,6 +9,7 @@ class Engine {
             this.render(callback);
 
             if (typeof callback === 'function') {
+                callback = callback.bind(this);
                 callback();
             }
         });
