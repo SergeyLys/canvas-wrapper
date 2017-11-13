@@ -1,4 +1,4 @@
-export default class KeyboardEvents {
+class KeyboardEvents {
     constructor() {
         const keys = {
             'a':	        65,
@@ -40,7 +40,7 @@ export default class KeyboardEvents {
             'Alt':          18,
         };
         this.keyDown = {};
-
+        
         this._setKey = this._setKey.bind(this);
         this._clearKey = this._clearKey.bind(this);
 
@@ -69,3 +69,5 @@ export default class KeyboardEvents {
         this.keyDown[event.keyCode] = true;
     }
 }
+
+export default new KeyboardEvents();

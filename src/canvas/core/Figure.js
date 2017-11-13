@@ -1,6 +1,6 @@
 import KeyboardEvents from './Keyboard';
 
-export default  class Figure {
+export default class Figure {
     constructor(ctx, props) {
         this.ctx = ctx;
 
@@ -16,6 +16,8 @@ export default  class Figure {
 
         this.reverseY = false;
         this.reverseX = false;
+
+        // this.KeyboardEvents = new KeyboardEvents();
 
     }
 
@@ -49,7 +51,6 @@ export default  class Figure {
     }
 
     listenKey(key, callback) {
-        const appKeyboardEvents = new KeyboardEvents();
         const keys = key.split(' ');
 
         if (typeof callback === 'function') {
@@ -57,7 +58,7 @@ export default  class Figure {
             callback = callback.bind(this);
 
             for (let i = 0; i < keys.length; i++) {
-                if (appKeyboardEvents.isKeyDown(keys[i])) {
+                if (KeyboardEvents.isKeyDown(keys[i])) {
                     callback();
                 }
             }
@@ -157,7 +158,6 @@ export default  class Figure {
                 this.reverseY = false;
             }
         }
-
 
         this._paint();
     }

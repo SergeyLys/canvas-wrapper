@@ -1,5 +1,6 @@
 import AppRectangle from './core/Rectangle';
 import AppCircle from './core/Circle';
+import Engine from './core/Engine';
 
 export default class App {
     constructor() {
@@ -7,6 +8,7 @@ export default class App {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const ctx = canvas.getContext('2d');
+        const eng = new Engine();
 
         const arc = new AppCircle(ctx, {
             x: 'center',
@@ -49,10 +51,45 @@ export default class App {
         });
 
         canvas.addEventListener('click', function (e) {
-            console.log('x ' + (e.clientX - platform.x), 'y '+ (e.clientY - platform.y));
             const coordX = parseInt(e.clientX - platform.x);
             const coordY = parseInt(e.clientY - platform.y);
             platform.moveTo(coordX, coordY);
+        });
+
+        eng.render(function () {
+            
+            rec1.listenKey('ArrowLeft a', function () {
+                this.move(1,'left');
+                rec2.move(1.5,'left');
+                rec3.move(2,'left');
+            });
+            rec1.listenKey('ArrowRight d', function () {
+                this.move(1,'right');
+                rec2.move(1.5,'right');
+                rec3.move(2,'right');
+            });
+            rec1.listenKey('ArrowUp w', function () {
+                this.move(1,'up');
+                rec2.move(1.5, 'up');
+                rec3.move(2, 'up');
+            });
+            rec1.listenKey('ArrowDown s', function () {
+                this.move(1,'down');
+                rec2.move(1.5, 'down');
+                rec3.move(2, 'down');
+            });
+            arc.listenKey('ArrowDown s', function () {
+                this.move(3, 'down');
+            });
+            arc.listenKey('ArrowLeft s', function () {
+                this.move(3, 'left');
+            });
+            arc.listenKey('ArrowRight s', function () {
+                this.move(3, 'right');
+            });
+            arc.listenKey('ArrowUp s', function () {
+                this.move(3, 'up');
+            });
         });
 
         function loop() {
@@ -60,41 +97,8 @@ export default class App {
 
                 loop();
 
-                rec1.listenKey('ArrowLeft a', function () {
-                    this.move(1,'left');
-                    rec2.move(1.5,'left');
-                    rec3.move(2,'left');
-                });
-                rec1.listenKey('ArrowRight d', function () {
-                    this.move(1,'right');
-                    rec2.move(1.5,'right');
-                    rec3.move(2,'right');
-                });
-                rec1.listenKey('ArrowUp w', function () {
-                    this.move(1,'up');
-                    rec2.move(1.5, 'up');
-                    rec3.move(2, 'up');
-                });
-                rec1.listenKey('ArrowDown s', function () {
-                    this.move(1,'down');
-                    rec2.move(1.5, 'down');
-                    rec3.move(2, 'down');
-                });
-                arc.listenKey('ArrowDown s', function () {
-                    this.move(3, 'down');
-                });
-                arc.listenKey('ArrowLeft s', function () {
-                    this.move(3, 'left');
-                });
-                arc.listenKey('ArrowRight s', function () {
-                    this.move(3, 'right');
-                });
-                arc.listenKey('ArrowUp s', function () {
-                    this.move(3, 'up');
-                });
-
-//                        arc.infiniteYMoving(5);
-//                        arc.infiniteXMoving(5);
+                       // arc.infiniteYMoving(5);
+                       // arc.infiniteXMoving(5);
 
             });
         }

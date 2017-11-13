@@ -1,5 +1,5 @@
-import App from './canvas';
+import App from './canvas/App';
 
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
     new App();
 });
