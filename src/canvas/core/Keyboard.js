@@ -38,6 +38,7 @@ class KeyboardEvents {
             'Shift':        16,
             'Control':      17,
             'Alt':          18,
+            'Space':        32,
         };
         this.keyDown = {};
         

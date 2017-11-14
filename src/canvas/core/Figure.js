@@ -17,7 +17,12 @@ export default class Figure {
         this.reverseY = false;
         this.reverseX = false;
 
-        // this.KeyboardEvents = new KeyboardEvents();
+    }
+
+    position(x, y) {
+        this.x = x;
+        this.y = y;
+        this._paint();
 
     }
 
@@ -117,9 +122,6 @@ export default class Figure {
 
     infiniteXMoving(speed) {
 
-
-        this.ctx.clearRect(this.x, this.y, (this.sideX || this.radius*2), (this.sideY || this.radius*2));
-
         if (this.x < this.ctx.canvas.width - (this.sideX || this.radius*2) && this.reverseX === false) {
 
             speed ? this.x += speed : this.x++;
@@ -141,7 +143,6 @@ export default class Figure {
     }
 
     infiniteYMoving(speed) {
-        this.ctx.clearRect(this.x, this.y, (this.sideX || this.radius*2), (this.sideY || this.radius*2));
 
         if (this.y < this.ctx.canvas.height - (this.sideY || this.radius*2) && this.reverseY === false) {
             speed ? this.y += speed : this.y++;

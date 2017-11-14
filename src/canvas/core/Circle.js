@@ -8,10 +8,16 @@ export default class AppCircle extends Figure {
         this.radius = props[1].radius;
 
         this._setPositions();
-        this._paint();
+
+        this.angle = 290;
+        this.speed = 1;
+
+        this.radian = this.angle * Math.PI/180;
+        this.vx = Math.cos(this.radian)*this.speed;
+        this.vy = Math.sin(this.radian)*this.speed;
     }
 
-    _paint() {
+    paint() {
         this.ctx.beginPath();
         this.ctx.arc(this.x+this.radius, this.y+this.radius, this.radius, 0, Math.PI * 2, true);
 
@@ -33,8 +39,23 @@ export default class AppCircle extends Figure {
 
     }
 
+    jump(speed, angle, gravity) {
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if ((this.y + this.radius*2) <= this.ctx.canvas.height) {
+            this.vy += gravity;
+        } else {
+            this.vy = 0;
+            this.vx = 0;
+            this.y = this.ctx.canvas.height - this.radius*2;
+        }
+        
+        this._paint();
+    }
+
     move(...props) {
-        this.ctx.clearRect(this.x, this.y, this.radius*2, this.radius*2);
         super.move(...props);
         this._paint();
     }

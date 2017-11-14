@@ -8,7 +8,6 @@ export default class AppRectangle extends Figure {
 
         this._setPositions();
         this._errorHandler();
-        this._paint();
     }
 
     _errorHandler() {
@@ -30,21 +29,18 @@ export default class AppRectangle extends Figure {
     }
 
     move(...props) {
-        this.ctx.clearRect(this.x, this.y, this.sideX, this.sideY);
         super.move(...props);
     }
 
     moveTo(coordX, coordY) {
 
-        this.ctx.clearRect(this.x, this.y, this.sideX, this.sideY);
-
         this.x = (this.x - this.sideX/2) + coordX;
         this.y = (this.y - this.sideY/2) + coordY;
 
-        this._paint();
+        this.paint();
     }
 
-    _paint() {
+    paint() {
         super._paint();
         this.ctx.fillRect(this.x, this.y, this.sideX, this.sideY);
     }
