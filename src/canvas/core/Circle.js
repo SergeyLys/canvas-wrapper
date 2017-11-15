@@ -9,7 +9,7 @@ export default class AppCircle extends Figure {
 
         this._setPositions();
 
-        this.angle = 290;
+        this.angle = 90;
         this.speed = 1;
 
         this.radian = this.angle * Math.PI/180;

@@ -8,10 +8,21 @@ class Engine {
 
     _createCanvas() {
         const canvas = document.createElement('canvas');
+
+        document.body.appendChild(canvas);
+
+        this._setSize(canvas);
+
+        window.addEventListener('resize', ()=> {
+            this._setSize(canvas);
+        });
+
+        this.ctx = canvas.getContext('2d');
+    }
+
+    _setSize(canvas) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        document.body.appendChild(canvas);
-        this.ctx = canvas.getContext('2d');
     }
 
     render(callback) {
@@ -25,6 +36,10 @@ class Engine {
             }
 
         });
+    }
+
+    jump(obj) {
+        console.log(obj);
     }
 }
 

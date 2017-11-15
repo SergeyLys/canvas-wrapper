@@ -1,5 +1,3 @@
-//Serhii_Lysykh@epam.com
-
 import AppRectangle from './canvas/core/Rectangle';
 import AppCircle from './canvas/core/Circle';
 import Engine from './canvas/core/Engine';
@@ -64,8 +62,6 @@ window.addEventListener('load', function () {
         // platform.moveTo(coordX, coordY);
     });
 
-
-
     engine.render(function () {
 
         rec1.paint();
@@ -106,6 +102,8 @@ window.addEventListener('load', function () {
         });
         arc.listenKey('ArrowUp s', function () {
             this.move(3, 'up');
+
+            engine.jump(this);
         });
 
         arc.jump(engine.speed, 290, engine.gravity);
