@@ -34,6 +34,12 @@ Is required method for rendering objects in engine loop.
   });
 ```
 
+`engine.ctx`
+Is the context of canvas.
+
+`engine.ctx.canvas`
+Canvas area.
+
 ## Circle
 
 ```javascript
@@ -46,7 +52,20 @@ Is required method for rendering objects in engine loop.
   });
 ```
 
-## Object texture
+`typeStyle`
+The style of circle, available `fill` and `stroke`. In case `stroke` style, should to use `strokeColor` option for stroke the circle.
+
+```javascript
+  const strokedCircle = new AppCircle(engine.ctx, {
+      x: 70,
+      y: 70,
+      radius: 10,
+      typeStyle: 'stroke',
+      strokeColor: 'rgba(255,0,0,1)',
+  });
+```
+
+## Object sprite texture
 
 ```javascript
   const person = new AppRectangle(engine.ctx, {
@@ -60,6 +79,21 @@ Is required method for rendering objects in engine loop.
   });
 ```
 
+`texture`
+Path of your sprite-image
+
+`frameWidth`
+Width of one frame of the sprite
+
+`frameHeight`
+Height of one frame of the sprite
+
+`frameCount`
+Count of frames in the sprite
+
+`frameSpeed`
+Frequency of refreshing frame in the sprite
+
 ## Keyboard events
 
 ```javascript
@@ -72,3 +106,11 @@ Is required method for rendering objects in engine loop.
         });
     });
 ```
+
+## Methods
+
+`.paint(direction)`
+Fill or stroke object, required in engine loop. `direction` is available and needed in textured object.
+
+`.move(speed, direction)`
+Makes object to move with speed and direction.
