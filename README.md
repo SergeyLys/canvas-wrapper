@@ -35,15 +35,16 @@ Is required method for rendering objects in engine loop.
 ```
 
 `x` position of the object in X axios. Available options `left`, `top`, `right`, `bottom`, `center`.
+
 `y` position of the object in Y axios. Available options `left`, `top`, `right`, `bottom`, `center`.
+
 `sideX` width of the object.
+
 `sideY` height of the object.
 
-`engine.ctx`
-Is the context of canvas.
+`engine.ctx` Is the context of canvas.
 
-`engine.ctx.canvas`
-Canvas area.
+`engine.ctx.canvas` Canvas area.
 
 ## Circle
 
