@@ -71,7 +71,7 @@ The style of circle, available `fill` and `stroke`. In case `stroke` style, shou
   const person = new AppRectangle(engine.ctx, {
       x: 50,
       y: 50,
-      texture: texture,
+      texture: './images/sprite.png',
       frameWidth: 108,
       frameHeight: 140,
       frameCount: 8,
