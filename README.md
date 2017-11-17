@@ -34,6 +34,11 @@ Is required method for rendering objects in engine loop.
   });
 ```
 
+`x` position of the object in X axios. Available options `left`, `top`, `right`, `bottom`, `center`.
+`y` position of the object in Y axios. Available options `left`, `top`, `right`, `bottom`, `center`.
+`sideX` width of the object.
+`sideY` height of the object.
+
 `engine.ctx`
 Is the context of canvas.
 
@@ -98,7 +103,7 @@ Frequency of refreshing frame in the sprite
 
 ```javascript
     engine.render(function () {
-        rectangle.paint();
+        person.paint();
 
         person.listenKey('ArrowLeft a', function () {
             this.move(4,'left');

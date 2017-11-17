@@ -94,8 +94,8 @@ export default class Figure {
     }
 
     _setPositions() {
-        const centerX = this.ctx.canvas.width / 2 - ( (this.sideX || this.radius*2) / 2);
-        const centerY = this.ctx.canvas.height / 2 - ( (this.sideY || this.radius*2) / 2);
+        const centerX = this.ctx.canvas.width / 2 - ( (this.frameWidth || this.sideX || this.radius*2) / 2);
+        const centerY = this.ctx.canvas.height / 2 - ( (this.frameHeight || this.sideY || this.radius*2) / 2);
 
         if (this.x === 'center') {
             this.x = centerX;
@@ -106,7 +106,7 @@ export default class Figure {
         }
 
         if (this.x === 'right') {
-            this.x = this.ctx.canvas.width - (this.sideY || this.radius*2);
+            this.x = this.ctx.canvas.width - (this.frameWidth || this.sideY || this.radius*2);
         }
 
         if (this.y === 'center') {
@@ -114,7 +114,7 @@ export default class Figure {
         }
 
         if (this.y === 'bottom') {
-            this.y = this.ctx.canvas.height - (this.sideY || this.radius*2);
+            this.y = this.ctx.canvas.height - (this.frameHeight || this.sideY || this.radius*2);
         }
 
         if (this.y === 'top') {
