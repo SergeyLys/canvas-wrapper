@@ -101,8 +101,8 @@ Frequency of refreshing frame in the sprite
         rectangle.paint();
 
         person.listenKey('ArrowLeft a', function () {
-            person.move(4,'left');
-            person.paint('left');
+            this.move(4,'left');
+            this.paint('left');
         });
     });
 ```
