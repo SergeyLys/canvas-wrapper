@@ -39,7 +39,7 @@ class Engine {
     }
 
     jump(obj) {
-        console.log(obj);
+        // console.log(obj);
     }
 }
 

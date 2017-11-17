@@ -19,13 +19,16 @@ export default class AppRectangle extends Figure {
             throw 'Parameter "y" of rectangle is required'
         }
 
-        if (this.sideX === null || this.sideY === null) {
-            throw `Parameter ${this.sideX ? "sideY" : "sideX"} of rectangle is required`;
+        if (!this.texture) {
+            if (this.sideX === null || this.sideY === null) {
+                throw `Parameter ${this.sideX ? "sideY" : "sideX"} of rectangle is required`;
+            }
+
+            if (this.sideX < 1 || this.sideY < 1) {
+                throw `Parameter ${this.sideX < 1 ? "sideX" : "sideY"} of rectangle is invalid`;
+            }
         }
 
-        if (this.sideX < 1 || this.sideY < 1) {
-            throw `Parameter ${this.sideX < 1 ? "sideX" : "sideY"} of rectangle is invalid`;
-        }
     }
 
     move(...props) {
@@ -40,8 +43,8 @@ export default class AppRectangle extends Figure {
         this.paint();
     }
 
-    paint() {
-        super._paint();
+    paint(...props) {
+        super._paint(...props);
         this.ctx.fillRect(this.x, this.y, this.sideX, this.sideY);
     }
 }

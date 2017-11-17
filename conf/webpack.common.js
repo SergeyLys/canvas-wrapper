@@ -57,6 +57,14 @@ module.exports = {
             // use style-loader in development
             fallback: "style-loader"
         })
+    },{
+        test: /\.(png|jpg|gif)$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {}
+            }
+        ]
     }]
   },
   plugins: [

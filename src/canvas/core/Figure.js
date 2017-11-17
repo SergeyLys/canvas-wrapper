@@ -13,10 +13,77 @@ export default class Figure {
         this.fillColor = props.fillColor        || null;
         this.strokeColor = props.strokeColor    || null;
         this.strokeWidth = props.strokeWidth    || null;
+        this.texture = props.texture            || null;
 
         this.reverseY = false;
         this.reverseX = false;
 
+        if (this.texture) {
+            this.frameWidth = props.frameWidth;
+            this.frameHeight = props.frameHeight;
+            this.frameCount = props.frameCount;
+            this.frameSpeed = props.frameSpeed;
+
+            this.result = this._loadImage(this.texture, this.frameWidth, this.frameHeight, this.frameCount);
+
+            this.tickCount = 0;
+        }
+
+    }
+
+    _drawImage(image, x, y, direction) {
+        this.tickCount++;
+
+        if (this.tickCount > this.frameSpeed) {
+            this.tickCount = 0;
+
+            if (image.currentFrame >= image.frameCount) {
+                image.currentFrame = 1;
+            } else {
+                image.currentFrame += 1;
+            }
+        }
+
+        if (image.loaded) {
+
+            switch (direction) {
+                case 'right': {
+                    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    this.ctx.drawImage(image.image, image.frameWidth*(image.currentFrame-1), 0, image.frameWidth, image.frameHeight, x, y, image.frameWidth, image.frameHeight);
+                } break;
+
+                case 'left': {
+                    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    this.ctx.drawImage(image.image, image.imageW - (image.frameWidth*(image.currentFrame)), image.frameHeight, image.frameWidth, image.frameHeight, x, y, image.frameWidth, image.frameHeight);
+                } break;
+
+                default: {
+                    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                    this.ctx.drawImage(image.image, image.frameWidth, 0, image.frameWidth, image.frameHeight, x, y, image.frameWidth, image.frameHeight);
+                }
+            }
+        }
+    }
+
+    _loadImage(p, w, h, c) {
+        let image = new Image();
+        let result = {
+            image: image,
+            frameWidth: w,
+            frameHeight: h,
+            frameCount: c,
+            currentFrame: 1,
+            loaded: false
+        };
+
+        image.addEventListener('load', () => {
+            result.loaded = true;
+        });
+        image.src = p;
+        result.imageW = image.width;
+        result.imageH = image.height;
+
+        return result;
     }
 
     position(x, y) {
@@ -73,23 +140,30 @@ export default class Figure {
         }
     }
 
-    _paint() {
-        if (this.strokeColor) {
-            this.ctx.strokeStyle = this.strokeColor;
+    _paint(direction) {
+
+        if (this.texture) {
+            this._drawImage(this.result, this.x, this.y, direction);
+        } else {
+            if (this.strokeColor) {
+                this.ctx.strokeStyle = this.strokeColor;
+            }
+
+            if (this.fillColor) {
+                this.ctx.fillStyle = this.fillColor;
+            }
         }
 
-        if (this.fillColor) {
-            this.ctx.fillStyle = this.fillColor;
-        }
     }
 
     move(speed, direction) {
 
         if (direction === 'right') {
-            if (this.x < this.ctx.canvas.width - (this.sideX || this.radius*2)) {
+            if (this.x < this.ctx.canvas.width - (this.sideX || this.radius*2 || this.frameWidth)) {
+
                 speed ? this.x += speed : this.x++;
             } else {
-                this.x = this.ctx.canvas.width - (this.sideX || this.radius*2);
+                this.x = this.ctx.canvas.width - (this.sideX || this.radius*2 || this.frameWidth);
             }
         }
 
@@ -102,10 +176,10 @@ export default class Figure {
         }
 
         if (direction === 'down') {
-            if (this.y < this.ctx.canvas.height - (this.sideY || this.radius*2)) {
+            if (this.y < this.ctx.canvas.height - (this.sideY || this.radius*2 || this.frameWidth)) {
                 speed ? this.y += speed : this.y++;
             } else {
-                this.y = this.ctx.canvas.height - (this.sideY || this.radius*2);
+                this.y = this.ctx.canvas.height - (this.sideY || this.radius*2 || this.frameWidth);
             }
         }
 
